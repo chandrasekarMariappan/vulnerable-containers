@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/instance: frontend
+  name: frontend
+  namespace: vulnerable-httpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: frontend
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment: frontend
+    spec:
+      containers:
+      - image: registry.itix.xyz/vulnerable/vulnerable-httpd:centos-6
+        imagePullPolicy: IfNotPresent
+        name: frontend
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
