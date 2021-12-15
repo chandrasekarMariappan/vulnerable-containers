@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: apiserver
-  name: apiserver
+    app: settlement-app
+  name: settlement-app
   namespace: vulnerable-log4j
 spec:
   ports:
@@ -12,6 +12,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    deployment: apiserver
+    deployment: settlement-app
   sessionAffinity: None
   type: ClusterIP
