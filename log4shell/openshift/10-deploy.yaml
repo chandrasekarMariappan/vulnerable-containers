@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apiserver
+    app.kubernetes.io/component: apiserver
+    app.kubernetes.io/instance: apiserver
+  name: apiserver
+  namespace: vulnerable-log4j
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: apiserver
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment: apiserver
+    spec:
+      containers:
+      - image: registry.itix.xyz/vulnerable/vulnerable-log4j:latest
+        imagePullPolicy: Always
+        name: apiserver
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
