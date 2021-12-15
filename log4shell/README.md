@@ -49,7 +49,7 @@ oc secrets link default itix-registry --for=pull
 Find the URL of the vulnerable container.
 
 ```sh
-export TARGET="https://$(oc get route apiserver -n vulnerable-log4j -o jsonpath="{.spec.host}")/"
+export TARGET="https://$(oc get route settlement-app -n vulnerable-log4j -o jsonpath="{.spec.host}")/"
 ```
 
 Go to https://log4shell.huntress.com/ and pass the generated string in the `X-Name` HTTP header.
